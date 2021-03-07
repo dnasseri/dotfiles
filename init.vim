@@ -35,7 +35,7 @@ map <ScrollWheelUp> <C-Y>
 map j gj
 map k gk
 
-nnoremap <leader>a :Ack!
+nnoremap <leader>a :Ag<CR>
 nnoremap <leader>cp :let @*=expand("%")<CR>
 nnoremap <leader>t :FZF<cr>
 nnoremap <leader>n :NERDTree<cr>
@@ -76,5 +76,6 @@ set wildignore+=*.swp,*.bak,*.pyc,*.class,*.jar,*.gif,*.png,*.jpg
 set wildignore=*.o,*.obj,*.otf,*.eot,*.ttf,*.woff,*.svg,tmp,node_modules
 set wildmenu
 set wrap
+set shell=/bin/fish
 
 syntax enable
