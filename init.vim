@@ -39,6 +39,7 @@ nnoremap <leader>a :Ack!
 nnoremap <leader>cp :let @*=expand("%")<CR>
 nnoremap <leader>t :FZF<cr>
 nnoremap <leader>n :NERDTree<cr>
+nnoremap <leader>g :Git blame<cr>
 nnoremap <Space> :
 
 set ai
