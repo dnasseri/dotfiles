@@ -6,6 +6,11 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost make nested copen
+augroup END
+
 filetype plugin on
 filetype indent on
 
@@ -25,6 +30,7 @@ let g:mapleader = ","
 let g:python3_host_prog = '/usr/bin/python3'
 let mapleader = ","
 let NERDTreeShowHidden=1
+let &runtimepath.=',~/.vim/bundle/neoterm'
 
 map <C-h> <C-W>h
 map <C-j> <C-W>j
@@ -37,10 +43,17 @@ map k gk
 
 nnoremap <leader>a :Ag<CR>
 nnoremap <leader>cp :let @*=expand("%")<CR>
-nnoremap <leader>t :FZF<cr>
+nnoremap <leader>t :GFiles<cr>
+nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>n :NERDTree<cr>
 nnoremap <leader>g :Git blame<cr>
+nnoremap <leader>x :Tnew<cr>
+nnoremap <leader>f :Goyo<cr>
+nnoremap <leader>v :<C-V>
 nnoremap <Space> :
+
+map <leader>vimrc :tabe ~/.config/nvim/init.vim<cr>
+autocmd bufwritepost .vimrc source $MYVIMRC
 
 set ai
 set backspace=eol,start,indent
