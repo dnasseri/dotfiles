@@ -1,10 +1,39 @@
-execute pathogen#infect()
+call plug#begin('~/.config/nvim/plugged')
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" For async completion
+Plug 'Shougo/deoplete.nvim'
+" For Denite features
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/goyo.vim'
+Plug 'preservim/nerdtree'
+Plug 'tomlion/vim-solidity'
+Plug 'kassio/neoterm'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'dag/vim-fish'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'leafgarland/typescript-vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'elzr/vim-json'
+Plug 'tikhomirov/vim-glsl'
+
+call plug#end()
+
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 
 augroup quickfix
   autocmd!
@@ -14,23 +43,26 @@ augroup END
 filetype plugin on
 filetype indent on
 
+highlight VertSplit cterm=NONE
+
 let g:clipboard = {
-  \   'name': 'win32yank-wsl',
-  \   'copy': {
-  \     '+': 'win32yank.exe -i --crlf',
-  \     '*': 'win32yank.exe -i --crlf',
-  \   },
-  \   'paste': {
-  \     '+': 'win32yank.exe -o --lf',
-  \     '*': 'win32yank.exe -o --lf',
-  \   },
-  \   'cache_enabled': 0,
-  \ }
+      \   'name': 'win32yank-wsl',
+      \   'copy': {
+      \     '+': 'win32yank.exe -i --crlf',
+      \     '*': 'win32yank.exe -i --crlf',
+      \   },
+      \   'paste': {
+      \     '+': 'win32yank.exe -o --lf',
+      \     '*': 'win32yank.exe -o --lf',
+      \   },
+      \   'cache_enabled': 0,
+      \ }
 let g:mapleader = ","
 let g:python3_host_prog = '/usr/bin/python3'
+let g:deoplete#enable_at_startup = 1
 let mapleader = ","
 let NERDTreeShowHidden=1
-let &runtimepath.=',~/.vim/bundle/neoterm'
+let g:airline_theme='nord'
 
 map <C-h> <C-W>h
 map <C-j> <C-W>j
@@ -56,12 +88,14 @@ map <leader>vimrc :tabe ~/.config/nvim/init.vim<cr>
 autocmd bufwritepost .vimrc source $MYVIMRC
 
 set ai
+set background=dark
 set backspace=eol,start,indent
 set clipboard+=unnamedplus
 set colorcolumn=121
 set encoding=utf8
 set expandtab
 set ffs=unix,dos,mac
+set incsearch
 set history=2000
 set hlsearch
 set ignorecase
@@ -90,5 +124,8 @@ set wildignore=*.o,*.obj,*.otf,*.eot,*.ttf,*.woff,*.svg,tmp,node_modules
 set wildmenu
 set wrap
 set shell=/bin/fish
+" set filetypes as typescriptreact
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 syntax enable
+colorscheme nord
